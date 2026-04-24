@@ -1,8 +1,12 @@
 package com.example.bibliotecaduoc.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.example.bibliotecaduoc.model.Libro;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 // public class LibroRepository {
@@ -11,6 +15,9 @@ import com.example.bibliotecaduoc.model.Libro;
 // private List<Libro> listaLibros = new ArrayList<Libro>();
 public interface LibroRepository extends JpaRepository<Libro, Integer> {
 
+    // Consulta nativa simple
+    @Query(value = "SELECT * FROM libros WHERE editorial = :editorial", nativeQuery = true)
+    List<Libro> selectPorEditorial(@Param("editorial") String editorial);
 
     // Metodo que retorna todoa los libros
     // public List<Libro> obtenerLibros() {

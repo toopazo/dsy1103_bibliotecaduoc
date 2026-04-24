@@ -18,6 +18,8 @@ import com.example.bibliotecaduoc.mapper.LibroMapper;
 import com.example.bibliotecaduoc.model.Libro;
 import com.example.bibliotecaduoc.service.LibroService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * Controller REST modernizado para Java 21 LTS y Spring Boot 3.3+ 100% REST compliant
@@ -79,4 +81,15 @@ public class LibroController {
                 int total = libroService.totalLibrosV2();
                 return ResponseEntity.ok(total);
         }
+
+        @GetMapping("/editorial/{editorial}")
+        public List<Libro> getporEditorial(@PathVariable String editorial) {
+            return libroService.obtenerPorEditorial(editorial);
+        }
+
+        @GetMapping("/editorial")
+        public List<Libro> getporEditorial2(@RequestParam String editorial) {
+            return libroService.obtenerPorEditorial(editorial);
+        }
+        
 }
